@@ -10,8 +10,9 @@ class Collection extends AbstractCollection
     /**
      * @var string
      */
-    protected $_idFieldName = 'entity_id';
+    protected $_idFieldName = 'entity_id'; // @phpcs:ignore
 
+    // @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
     protected function _construct(): void
     {
         $this->_init({{ entityName|pascal }}::class, {{ entityName|pascal }}ResourceModel::class);
