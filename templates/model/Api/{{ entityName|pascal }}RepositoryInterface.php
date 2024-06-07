@@ -16,16 +16,16 @@ interface {{ entityName|pascal }}RepositoryInterface
     public function getById(int $id): {{ entityName|pascal }}Interface;
 
     /**
-     * @param \{{ vendorName|pascal }}\{{ moduleName|pascal }}\Api\Data\{{ entityName|pascal }}Interface
+     * @param \{{ vendorName|pascal }}\{{ moduleName|pascal }}\Api\Data\{{ entityName|pascal }}Interface ${{ entityName|camel }}
      * @return void
      */
-    public function save({{ entityName|pascal }}Interface ${{ entityName|pascal }}): void;
+    public function save({{ entityName|pascal }}Interface ${{ entityName|camel }}): void;
 
     /**
-     * @param \{{ vendorName|pascal }}\{{ moduleName|pascal }}\Api\Data\{{ entityName|pascal }}Interface
+     * @param \{{ vendorName|pascal }}\{{ moduleName|pascal }}\Api\Data\{{ entityName|pascal }}Interface ${{ entityName|camel }}
      * @return void
      */
-    public function delete({{ entityName|pascal }}Interface ${{ entityName|pascal }}): void;
+    public function delete({{ entityName|pascal }}Interface ${{ entityName|camel }}): void;
 
     /**
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria

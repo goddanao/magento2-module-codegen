@@ -41,13 +41,11 @@ class {{ entityName|pascal }}Repository implements {{ entityName|pascal }}Reposi
 
     public function save({{ entityName|pascal }}Interface ${{ entityName|camel }}): void
     {
-        /** @var ${{ entityName|camel }} {{ entityName|pascal }} **/
         ${{ entityName|camel }}->getResource()->save(${{ entityName|camel }});
     }
 
     public function delete({{ entityName|pascal }}Interface ${{ entityName|camel }}): void
     {
-        /** @var ${{ entityName|camel }} {{ entityName|pascal }} **/
         ${{ entityName|camel }}->getResource()->delete(${{ entityName|camel }});
     }
 
@@ -57,7 +55,9 @@ class {{ entityName|pascal }}Repository implements {{ entityName|pascal }}Reposi
         $this->collectionProcessor->process($searchCriteria, $collection);
         $searchResult = $this->searchResultFactory->create();
         $searchResult->setSearchCriteria($searchCriteria);
-        $searchResult->setItems($collection->getItems());
+        /** @var $items {{ entityName|pascal }}Interface[] **/
+        $items = $collection->getItems();
+        $searchResult->setItems($items);
         $searchResult->setTotalCount($collection->getSize());
         return $searchResult;
     }

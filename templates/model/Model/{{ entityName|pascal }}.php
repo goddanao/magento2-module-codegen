@@ -7,8 +7,9 @@ use {{ vendorName|pascal }}\{{ moduleName|pascal }}\Model\ResourceModel\{{ entit
 
 class {{ entityName|pascal }} extends AbstractModel implements {{ entityName|pascal }}Interface
 {
-    protected $_eventPrefix = '{{ vendorName|snake }}_{{ moduleName|snake }}_{{ entityName|snake }}';
+    protected $_eventPrefix = '{{ vendorName|snake }}_{{ moduleName|snake }}_{{ entityName|snake }}'; // @phpcs:ignore
 
+    // @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
     protected function _construct(): void
     {
         $this->_init({{ entityName|pascal }}ResourceModel::class);
@@ -16,24 +17,28 @@ class {{ entityName|pascal }} extends AbstractModel implements {{ entityName|pas
 
     public function getId()
     {
-        return $this->getData('entity_id');
+        return $this->getData(self::ENTITY_ID);
     }
 
-    public function setId($value): void
+    public function setId($value): {{ entityName|pascal }}Interface
     {
-        $this->setData('entity_id', $value);
+        $this->setData(self::ENTITY_ID, $value);
+
+        return $this;
     }
 {% for item in fields %}
 {% if item.name|lower_only != 'id' %}
 
     public function get{{ item.name|pascal }}(): ?{{ databaseTypeToPHP(item.databaseType) }}
     {
-        return $this->getData('{{ item.name|snake }}');
+        return $this->getData(self::{{ item.name|upper }});
     }
 
-    public function set{{ item.name|pascal }}({{ databaseTypeToPHP(item.databaseType) }} $value): void
+    public function set{{ item.name|pascal }}({{ databaseTypeToPHP(item.databaseType) }} $value): {{ entityName|pascal }}Interface
     {
-        $this->setData('{{ item.name|snake }}', $value);
+        $this->setData(self::{{ item.name|upper }}, $value);
+
+        return $this;
     }
 {% endif %}
 {% endfor %}
